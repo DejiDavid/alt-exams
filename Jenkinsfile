@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     dir('nginx-controller') {
-                        sh "aws eks --region us-east-1 update-kubeconfig --name demo"
+                       sh "aws eks --region us-east-1 update-kubeconfig --name demo"
                         sh "terraform init"
                         sh "terraform apply -auto-approve"
                     }
@@ -29,30 +29,30 @@ pipeline {
             }
         }
 
-        stage("Deploy the-voting-app to EKS") {
+        stage("Deploy voting-app to EKS") {
             steps {
                 script {
-                    dir('the-voting-app') {
+                    dir('voting-app') {
                         sh "kubectl apply -f voting-app.yaml"
                     }
                 }
             }
         }
 
-        stage("Deploy the-sock-shop to EKS") {
+        stage("Deploy sock-shop to EKS") {
             steps {
                 script {
-                    dir('the-sock-shop') {
+                    dir('sock-shop') {
                         sh "kubectl apply -f complete-deployment.yaml"
                     }
                 }
             }
         }
 
-        stage("Deploy ingress rules to EKS") {
+        stage("Deploy ingress rule to EKS") {
             steps {
                 script {
-                    dir('ingress-rules') {
+                    dir('ingress-rule') {
                         sh "terraform init"
                         sh "terraform apply -auto-approve"
                     }
