@@ -29,30 +29,30 @@ pipeline {
             }
         }
 
-        stage("Deploy voting-app to EKS") {
+        stage("Deploy the-voting-app to EKS") {
             steps {
                 script {
-                    dir('voting-app') {
+                    dir('the-voting-app') {
                         sh "kubectl apply -f voting-app.yaml"
                     }
                 }
             }
         }
 
-        stage("Deploy sock-shop to EKS") {
+        stage("Deploy the-sock-shop to EKS") {
             steps {
                 script {
-                    dir('sock-shop') {
+                    dir('the-sock-shop') {
                         sh "kubectl apply -f complete-deployment.yaml"
                     }
                 }
             }
         }
 
-        stage("Deploy ingress rule to EKS") {
+        stage("Deploy ingress rules to EKS") {
             steps {
                 script {
-                    dir('ingress-rule') {
+                    dir('ingress-rules') {
                         sh "terraform init"
                         sh "terraform apply -auto-approve"
                     }
